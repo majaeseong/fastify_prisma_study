@@ -1,6 +1,8 @@
 import Fastify from "fastify";
+import { PrismaClient } from "@prisma/client";
 
 const fastify = Fastify();
+const prisma = new PrismaClient();
 
 fastify.get("/ping", async (req, res) => {
   return "pong\n";
