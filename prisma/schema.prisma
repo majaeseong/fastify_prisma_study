@@ -13,20 +13,59 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id Int  @id @default(autoincrement())
-  title String
-  content String?
-  published Boolean @default(false)
-
-  author User? @relation(fields: [authorId],references: [id], onDelete: Cascade, onUpdate: Cascade)
-  authorId Int
-}
 
 model User {
   id Int  @id @default(autoincrement())
   email String  @unique
-  name String?
+  password String
+
+  token Token[]
+  articles Article[]
+  comments Comment[]
+  likes Like[]
+}
+
+model Token {
+  id Int  @id @default(autoincrement())
+  refreshToken String
+
+  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
+  userId Int
+}
+
+model Article {
+  id Int  @id @default(autoincrement())
+  content String
+  likeCount Int @default(0)
+  commentCount Int @default(0)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
   
-  posts Post[]
+  likes Like[]
+  comments Comment[]
+}
+
+model Like {
+  id Int  @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  
+  user User @relation(fields: [userId],references: [id], onDelete: Cascade)
+  userId Int
+
+  article Article @relation(fields: [articleId],references: [id], onDelete: Cascade)
+  articleId Int
+}
+
+model Comment {
+  id Int  @id @default(autoincrement())
+  content String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId],references: [id], onDelete: Cascade)
+  userId Int
+
+  article Article @relation(fields: [articleId],references: [id], onDelete: Cascade)
+  articleId Int
 }

@@ -1,12 +1,23 @@
 import Fastify from "fastify";
-import { PrismaClient } from "@prisma/client";
 
-const fastify = Fastify();
-const prisma = new PrismaClient();
+import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
+import routes from "./routes";
 
-fastify.get("/ping", async (req, res) => {
-  return "pong\n";
-});
+import type { FastifyCookieOptions } from "@fastify/cookie";
+import fastifyCookie from "@fastify/cookie";
+import { SECRET_KEY } from "./lib/constants";
+import { currentlyAuthPlugin } from "./plugin/authPlugin";
+
+const fastify = Fastify({
+  logger: true,
+}).withTypeProvider<TypeBoxTypeProvider>();
+
+fastify.register(fastifyCookie, {
+  secret: SECRET_KEY,
+} as FastifyCookieOptions);
+
+fastify.register(currentlyAuthPlugin);
+fastify.register(routes);
 
 const start = async () => {
   try {
