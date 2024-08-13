@@ -8,6 +8,8 @@ import {
   REFRESH_TOKEN_EXPIRES,
 } from "./constants";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { FastifyReply, FastifyRequest } from "fastify";
+import { handleError } from "./errorHelper";
 
 const generateHash = (pwd: string) => {
   const hashPwd = bcrypt.hashSync(pwd, ROUND);
@@ -101,6 +103,21 @@ const verifyAccessToken = (access_token: string) => {
   }
 };
 
+/**인증 유저 체크 */
+const verifySignIn = async (req: FastifyRequest, rep: FastifyReply) => {
+  const userId = req.user?.id;
+  const email = req.user?.email;
+
+  if (userId && email) {
+    return {
+      userId,
+      email,
+    };
+  } else {
+    handleError(rep, ERROR_MESSAGE.unauthorized);
+  }
+};
+
 export {
   generateHash,
   duplicateVerifyUser,
@@ -110,4 +127,5 @@ export {
   verifyRefreshToken,
   shortVerifyRefreshToken,
   verifyAccessToken,
+  verifySignIn,
 };

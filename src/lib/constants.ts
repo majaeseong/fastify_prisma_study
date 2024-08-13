@@ -92,6 +92,11 @@ const SUCCESS_MESSAGE = {
   },
 } as const;
 
+const ARTICLE_TYPE = {
+  ALL: "all",
+  MY: "my",
+} as const;
+
 export {
   FIRST_PWD,
   ROUND,
@@ -100,4 +105,5 @@ export {
   REFRESH_TOKEN_EXPIRES,
   ERROR_MESSAGE,
   SUCCESS_MESSAGE,
+  ARTICLE_TYPE,
 };

@@ -7,6 +7,7 @@ import type { FastifyCookieOptions } from "@fastify/cookie";
 import fastifyCookie from "@fastify/cookie";
 import { SECRET_KEY } from "./lib/constants";
 import { currentlyAuthPlugin } from "./plugin/authPlugin";
+import { checkStarupArticle } from "./startup";
 
 const fastify = Fastify({
   logger: true,
@@ -21,6 +22,7 @@ fastify.register(routes);
 
 const start = async () => {
   try {
+    await checkStarupArticle(); //더미 데이터 생성
     await fastify.listen({ port: 4000 });
     console.log("Server start!");
   } catch (err) {
