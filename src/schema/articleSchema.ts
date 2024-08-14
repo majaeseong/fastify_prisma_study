@@ -80,4 +80,5 @@ export {
   deleteArticleSchema,
   readArticleOneSchema,
   readArticlesSchema,
+  articlePagenationSchema,
 };
