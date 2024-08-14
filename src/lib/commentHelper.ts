@@ -32,8 +32,7 @@ const verifyCommentUser = async (
   const userId = req.user!.id;
 
   const result = await compareCommentUser(commentId, userId);
-  console.log("!!!!");
-  console.log(result);
+
   if (!result) handleError(rep, ERROR_MESSAGE.forbidden);
   return;
 };

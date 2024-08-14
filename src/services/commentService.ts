@@ -78,9 +78,6 @@ function commentService() {
         },
       });
 
-      console.log("####");
-      console.log(result);
-
       await db.article.update({
         where: {
           id: result.articleId,
