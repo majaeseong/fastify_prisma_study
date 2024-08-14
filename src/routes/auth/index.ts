@@ -8,9 +8,9 @@ import {
 } from "../../schema";
 import { TAtuhBody } from "../../schema/types";
 
-import authService from "../../services/authService";
+import authService from "../../services/auth.service";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../lib/constants";
-import { handleError } from "../../lib/errorHelper";
+import { handleError } from "../../lib/error.helper";
 
 const authRoute = async (fastify: FastifyInstance) => {
   fastify.post(

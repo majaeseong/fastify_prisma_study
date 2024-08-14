@@ -6,7 +6,7 @@ import routes from "./routes";
 import type { FastifyCookieOptions } from "@fastify/cookie";
 import fastifyCookie from "@fastify/cookie";
 import { SECRET_KEY } from "./lib/constants";
-import { currentlyAuthPlugin } from "./plugin/authPlugin";
+import { currentlyAuthPlugin } from "./plugin/auth.plugin";
 import { checkStarupArticle } from "./startup";
 
 const fastify = Fastify({

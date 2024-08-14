@@ -1,6 +1,6 @@
 import { Type } from "@sinclair/typebox";
-import { commonHeaderSchema } from "./commonSchema";
-import { commonBodySchema, articleParamSchema } from "./articleSchema";
+import { commonHeaderSchema } from "./common.schema";
+import { commonBodySchema, articleParamSchema } from "./article.schema";
 
 const headers = commonHeaderSchema;
 const body = commonBodySchema;

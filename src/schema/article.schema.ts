@@ -1,5 +1,5 @@
 import { Type } from "@sinclair/typebox";
-import { commonHeaderSchema, commonQuerySchema } from "./commonSchema";
+import { commonHeaderSchema, commonQuerySchema } from "./common.schema";
 
 const articleSchema = Type.Object({
   id: Type.Number(),

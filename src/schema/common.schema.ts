@@ -1,5 +1,5 @@
 import { Type } from "@sinclair/typebox";
-import { articleSchema } from "./articleSchema";
+import { articleSchema } from "./article.schema";
 
 const commonHeaderSchema = Type.Object({
   authorization: Type.Optional(Type.String()),

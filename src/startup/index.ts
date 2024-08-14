@@ -1,5 +1,5 @@
 import db from "../lib/db";
-import { generateHash } from "../lib/authHelper";
+import { generateHash } from "../lib/auth.helper";
 import { FIRST_PWD } from "../lib/constants";
 
 const checkStartupUser = async () => {

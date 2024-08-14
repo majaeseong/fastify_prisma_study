@@ -1,5 +1,5 @@
 import { FastifyPluginAsync, FastifyRequest } from "fastify";
-import { verifyAccessToken, shortVerifyRefreshToken } from "../lib/authHelper";
+import { verifyAccessToken, shortVerifyRefreshToken } from "../lib/auth.helper";
 import fp from "fastify-plugin";
 import { TCommonHeader } from "../schema/types";
 

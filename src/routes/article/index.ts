@@ -12,10 +12,10 @@ import {
   TCommonHeader,
   TCommonQuery,
 } from "../../schema/types";
-import { handleError } from "../../lib/errorHelper";
+import { handleError } from "../../lib/error.helper";
 import { ARTICLE_TYPE, ERROR_MESSAGE } from "../../lib/constants";
-import articleService from "../../services/articleService";
-import { verifySignIn } from "../../lib/authHelper";
+import articleService from "../../services/article.service";
+import { verifySignIn } from "../../lib/auth.helper";
 
 const articleRoute = async (fastify: FastifyInstance) => {
   fastify.route({

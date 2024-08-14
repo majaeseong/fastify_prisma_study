@@ -1,4 +1,4 @@
-import { getCrrentDate } from "../lib/dateHelper";
+import { getCrrentDate } from "../lib/date.helper";
 import db from "../lib/db";
 import { Tcomment } from "../schema/types";
 

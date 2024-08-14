@@ -1,17 +1,17 @@
 import { Static } from "@sinclair/typebox";
-import { authBodySchema } from "../authSchema";
-import { commonHeaderSchema, commonQuerySchema } from "../commonSchema";
+import { authBodySchema } from "../auth.schema";
+import { commonHeaderSchema, commonQuerySchema } from "../common.schema";
 import {
   articleParamSchema,
   articleSchema,
   commonBodySchema,
   articlePagenationSchema,
-} from "../articleSchema";
+} from "../article.schema";
 import {
   commentCretaeBodySchema,
   commentDeleteParamSchema,
   commentSchema,
-} from "../commentSchema";
+} from "../comment.schema";
 
 type TAtuhBody = Static<typeof authBodySchema>;
 type TCommonHeader = Static<typeof commonHeaderSchema>;

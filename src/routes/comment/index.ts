@@ -1,20 +1,13 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import { FastifyInstance } from "fastify";
 import {
   createCommentSchema,
   deleteCommentSchema,
   readCommentSchema,
 } from "../../schema";
-import { verifySignIn } from "../../lib/authHelper";
-import {
-  TArticleParam,
-  TCommonHeader,
-  TcommentCreateBody,
-  TcommentDeleteParam,
-} from "../../schema/types";
-import { handleError } from "../../lib/errorHelper";
-import { ERROR_MESSAGE } from "../../lib/constants";
-import commentService from "../../services/commentService";
-import { verifyCommentUser } from "../../lib/commentHelper";
+import { verifySignIn } from "../../lib/auth.helper";
+
+import { verifyCommentUser } from "../../lib/comment.helper";
+import commentContorller from "../../controller/comment.controller";
 
 const commentRoute = async (fastify: FastifyInstance) => {
   fastify.route({
@@ -22,45 +15,14 @@ const commentRoute = async (fastify: FastifyInstance) => {
     schema: createCommentSchema,
     url: "/",
     preHandler: [verifySignIn],
-    handler: async (
-      req: FastifyRequest<{ Headers: TCommonHeader; Body: TcommentCreateBody }>,
-      rep: FastifyReply
-    ) => {
-      const { articleId, content } = req.body;
-      const userId = req.user!.id;
-      const userEmail = req.user!.email;
-
-      try {
-        const result = await commentService.createComment(
-          articleId,
-          content,
-          userId,
-          userEmail
-        );
-        rep.status(200).send(result);
-      } catch (error) {
-        handleError(rep, ERROR_MESSAGE.badRequest, error);
-      }
-    },
+    handler: commentContorller.createComment,
   });
 
   fastify.route({
     method: "GET",
     schema: readCommentSchema,
     url: "/:articleId",
-    handler: async (
-      req: FastifyRequest<{ Headers: TCommonHeader; Params: TArticleParam }>,
-      rep: FastifyReply
-    ) => {
-      const { articleId } = req.params;
-
-      try {
-        const result = await commentService.readComment(articleId);
-        rep.status(200).send(result);
-      } catch (error) {
-        handleError(rep, ERROR_MESSAGE.badRequest, error);
-      }
-    },
+    handler: commentContorller.readComment,
   });
 
   fastify.route({
@@ -68,23 +30,7 @@ const commentRoute = async (fastify: FastifyInstance) => {
     schema: deleteCommentSchema,
     url: "/:commentId",
     preHandler: [verifySignIn, verifyCommentUser],
-    handler: async (
-      req: FastifyRequest<{
-        Headers: TCommonHeader;
-        Params: TcommentDeleteParam;
-      }>,
-      rep: FastifyReply
-    ) => {
-      const { commentId } = req.params;
-      const userId = req.user!.id;
-
-      try {
-        const result = await commentService.deleteComment(commentId, userId);
-        rep.status(200).send(result);
-      } catch (error) {
-        handleError(rep, ERROR_MESSAGE.badRequest, error);
-      }
-    },
+    handler: commentContorller.deleteComment,
   });
 };
 

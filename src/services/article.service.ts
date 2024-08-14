@@ -1,7 +1,7 @@
-import { getCrrentDate } from "../lib/dateHelper";
+import { getCrrentDate } from "../lib/date.helper";
 import db from "../lib/db";
 import { TArticle, TCommonPagenation } from "../schema/types";
-import { likeCompareArticles, verifyArticleUser } from "../lib/articleHeper";
+import { likeCompareArticles, verifyArticleUser } from "../lib/article.helper";
 import { ARTICLE_TYPE, ERROR_MESSAGE } from "../lib/constants";
 
 function articleService() {

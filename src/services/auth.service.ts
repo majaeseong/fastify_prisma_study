@@ -6,7 +6,7 @@ import {
   generateAccessToken,
   generateRefreshToken,
   verifyRefreshToken,
-} from "../lib/authHelper";
+} from "../lib/auth.helper";
 import { ERROR_MESSAGE } from "../lib/constants";
 
 function authService() {

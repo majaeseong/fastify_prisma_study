@@ -9,7 +9,7 @@ import {
 } from "./constants";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { handleError } from "./errorHelper";
+import { handleError } from "./error.helper";
 
 const generateHash = (pwd: string) => {
   const hashPwd = bcrypt.hashSync(pwd, ROUND);
