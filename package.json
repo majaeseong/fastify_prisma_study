@@ -8,6 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:build": "tsc -w --project tsconfig.json && npx -p tsconfig.json",
     "build:live": "npx tsx src/main.ts",
+    "start:pm2": "pm2 start ./ecosystem.config.cjs",
     "start": "npm run build:live"
   },
   "author": "",

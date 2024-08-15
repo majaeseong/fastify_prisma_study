@@ -38,7 +38,9 @@ fastify.register(routes);
 const start = async () => {
   try {
     await checkStarupArticle(); //더미 데이터 생성
-    await fastify.listen({ port: 4000 });
+    await fastify.listen({ port: 4000 }, () => {
+      if (process.send) process.send("ready");
+    });
     console.log("Server start!");
   } catch (err) {
     fastify.log.error(err);
